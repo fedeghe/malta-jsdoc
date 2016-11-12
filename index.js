@@ -38,7 +38,7 @@ function malta_doc(o, options) {
 
 	return function (solve, reject){
 		var ls = child_process.spawn('jsdoc', opts);
-		msg = 'plugin ' + path.basename(__filename) + ' wrote docs';
+		msg = 'plugin ' + path.basename(path.dirname(__filename)).white() + ' wrote docs';
 
 		ls.stdout.on('data', function(data) {
 			self.log_debug(data + "");
