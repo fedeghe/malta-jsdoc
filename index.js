@@ -28,12 +28,7 @@ function malta_doc(o, options) {
 		inDir = path.dirname(self.tplPath),
 		opts = [o.name, '-d', outFolder],
 		pluginName = path.basename(path.dirname(__filename)),
-		i,
-		doErr = function (e) {
-			console.log(('[ERROR on ' + o.name + ' using ' + pluginName + '] :').red());
-			console.dir(e);
-			self.stop();
-		};
+		i;
 
 	if ('config' in options) {
 		opts.push('-c', inDir + '/' + options.config);
@@ -50,7 +45,7 @@ function malta_doc(o, options) {
 				self.notifyAndUnlock(start, msg);
 			});
 		} catch (err) {
-			doErr(err);
+			self.doErr(err, o, pluginName);
 		}
 	};
 }
