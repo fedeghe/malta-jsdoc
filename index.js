@@ -27,30 +27,31 @@ function malta_doc(o, options) {
 		outFolder = dir + '/ ' + options.outFolder,
 		inDir = path.dirname(self.tplPath),
 		opts = [o.name, '-d', outFolder],
-		i;
+		pluginName = path.basename(path.dirname(__filename)),
+		i,
+		doErr = function (e) {
+			console.log(('[ERROR on ' + o.name + ' using ' + pluginName + '] :').red());
+			console.dir(e);
+			self.stop();
+		};
 
 	if ('config' in options) {
 		opts.push('-c', inDir + '/' + options.config);
 		self.listen(inDir + '/' + options.config);
 	}
 
-	// for (i in options) opts.push('-'+i, options[i]);
-
 	return function (solve, reject){
-		var ls = child_process.spawn('jsdoc', opts);
-		msg = 'plugin ' + path.basename(path.dirname(__filename)).white() + ' wrote docs';
-
-		ls.stdout.on('data', function(data) {
-			self.log_debug(data + "");
-		});
-
-		ls.stderr.on('error', function (data) {
-			self.log_err('stderr: ' + data);
-		});
-
-		solve(o);
-		self.notifyAndUnlock(start, msg);
-		ls.exit();
+		try {
+			var ls = child_process.spawn('jsdoc', opts);
+			msg = 'plugin ' + pluginName.white() + ' wrote docs';
+			ls.on('exit', function (code) {
+				msg = 'plugin ' + pluginName.white() + ' wrote docs';
+				solve(o);
+				self.notifyAndUnlock(start, msg);
+			});
+		} catch (err) {
+			doErr(err);
+		}
 	};
 }
 malta_doc.ext = ['js', 'coffee', 'ts'];
