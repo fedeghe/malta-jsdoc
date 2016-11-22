@@ -23,17 +23,34 @@ function malta_doc(o, options) {
 	var self = this,
 		start = new Date(),
 		msg,
-		dir = path.dirname(o.name),
-		outFolder = dir + '/ ' + options.outFolder,
+		outDir = path.dirname(o.name),
 		inDir = path.dirname(self.tplPath),
-		opts = [o.name, '-d', outFolder],
+		opts = [o.name],
 		pluginName = path.basename(path.dirname(__filename)),
 		i;
 
-	if ('config' in options) {
-		opts.push('-c', inDir + '/' + options.config);
-		self.listen(inDir + '/' + options.config);
+	if ('d' in options) {
+		opts.push('-d', outDir + '/' + options.d);
 	}
+	if ('c' in options) {
+		opts.push('-c', inDir + '/' + options.c);
+		self.listen(inDir + '/' + options.c);
+	}
+	if ('t' in options) {
+		opts.push('-t', options.t);
+	}
+
+/*
+    
+    -c, --configure <value>      The path to the configuration file. Default: path/to/jsdoc/conf.json
+    -d, --destination <value>    The path to the output folder. Use "console" to dump data to the console. Default: ./out/
+    -P, --package <value>        The path to the project's package file. Default: path/to/sourcefiles/package.json
+    -R, --readme <value>         The path to the project's README file. Default: path/to/sourcefiles/README.md
+    -t, --template <value>       The path to the template to use. Default: path/to/jsdoc/templates/default
+*/
+
+
+
 
 	return function (solve, reject){
 		try {

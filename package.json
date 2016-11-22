@@ -1,6 +1,6 @@
 {
   "name": "malta-jsdoc",
-  "version": "0.0.10",
+  "version": "0.0.11",
   "description": "Malta plugin to have jsdoc running live",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1"
