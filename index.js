@@ -61,6 +61,12 @@ function malta_doc(o, options) {
 				solve(o);
 				self.notifyAndUnlock(start, msg);
 			});
+			ls.on('error', function (err) {
+				msg = 'plugin ' + pluginName.white() + ' DIDN`T'.red() +' wrote docs';
+				self.doErr(err, o, pluginName);
+				solve(o);
+				self.notifyAndUnlock(start, msg);
+			});
 		} catch (err) {
 			self.doErr(err, o, pluginName);
 		}
