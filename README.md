@@ -6,26 +6,27 @@ Options :
     - t : absolute path for the template
 
 Sample usage:  
-
-    malta app/source/index.js public/js -plugins=malta-jsdoc[outFolder:\"docs\"]
-
+```
+malta app/source/index.js public/js -plugins=malta-jsdoc[outFolder:\"docs\"]
+```
 or in the .json file :
-
-    "app/source/index.js" : "public/js -plugins=malta-jsdoc[d:\"docs\"]",
-    "app/source/index.ts" : "public/js -plugins=malta-typescript...malta-jsdoc[d:\"docs\"]"
-
+```
+"app/source/index.js" : "public/js -plugins=malta-jsdoc[d:'docs']",
+"app/source/index.ts" : "public/js -plugins=malta-typescript...malta-jsdoc[d:'docs']"
+```
 or in a script : 
-
-    var Malta = require('malta');
-    Malta.get().check([
-        'app/source/index.js',
-        'public/js',
-        '-plugins=malta-jsdoc[d:\"docs\"]',
-        '-options=showPath:false,watchInterval:500,verbose:0'
-        ]).start(function (o) {
-            var s = this;
-            console.log('name : ' + o.name)
-            console.log("content : \n" + o.content);
-            'plugin' in o && console.log("plugin : " + o.plugin);
-            console.log('=========');
-        });
+``` js
+var Malta = require('malta');
+Malta.get().check([
+    'app/source/index.js',
+    'public/js',
+    '-plugins=malta-jsdoc[d:"docs"]',
+    '-options=showPath:false,watchInterval:500,verbose:0'
+    ]).start(function (o) {
+        var s = this;
+        console.log('name : ' + o.name)
+        console.log("content : \n" + o.content);
+        'plugin' in o && console.log("plugin : " + o.plugin);
+        console.log('=========');
+    });
+```
