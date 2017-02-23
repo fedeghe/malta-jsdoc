@@ -1,6 +1,6 @@
 {
   "name": "malta-jsdoc",
-  "version": "1.0.0",
+  "version": "1.0.1",
   "description": "Malta plugin to have jsdoc running live",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1"
@@ -16,13 +16,13 @@
     "malta jsdoc plugin"
   ],
   "author": "Federico Ghedina <federico.ghedina@gmail.com>",
-  "license": "UNLICENSED",
+  "license": "MIT",
   "bugs": {
     "url": "https://github.com/fedeghe/malta-jsdoc/issues"
   },
   "dependencies": {
     "jsdoc": "^3.4.3",
-    "malta": ">=3.0.0"
+    "malta": ">=3.4.0"
   },
   "main": "./index.js"
 }
