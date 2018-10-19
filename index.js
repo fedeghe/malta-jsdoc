@@ -13,7 +13,6 @@ require('malta').checkExec('jsdoc');
 // http://usejsdoc.org/
 
 var path = require('path'),
-	fs = require('fs'),
 	child_process = require('child_process');
 
 function malta_doc(o, options) {
