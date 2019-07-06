@@ -38,7 +38,6 @@ function malta_doc(o, options) {
 	if ('t' in options) {
 		opts.push('-t', options.t);
 	}
-
 /*
     
     -c, --configure <value>      The path to the configuration file. Default: path/to/jsdoc/conf.json
@@ -47,10 +46,6 @@ function malta_doc(o, options) {
     -R, --readme <value>         The path to the project's README file. Default: path/to/sourcefiles/README.md
     -t, --template <value>       The path to the template to use. Default: path/to/jsdoc/templates/default
 */
-
-
-
-
 	return function (solve, reject){
 		try {
 			var ls = child_process.spawn('jsdoc', opts);
@@ -63,7 +58,9 @@ function malta_doc(o, options) {
 			ls.on('error', function (err) {
 				msg = 'plugin ' + pluginName.white() + ' DIDN`T'.red() +' wrote docs';
 				self.doErr(err, o, pluginName);
-				solve(o);
+				err
+                    ? reject(`Plugin ${pluginName} JsDoc error:\n${err}`)
+                    : solve(o);
 				self.notifyAndUnlock(start, msg);
 			});
 		} catch (err) {
