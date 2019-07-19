@@ -21,8 +21,8 @@
         "url": "https://github.com/fedeghe/malta-jsdoc/issues"
     },
     "dependencies": {
-        "jsdoc": "^3.5.5",
-        "malta": ">=3.8.14"
+        "jsdoc": "^3.6.3",
+        "malta": "^4.0.4"
     },
     "main": "./index.js"
 }
