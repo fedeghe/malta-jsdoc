@@ -12,32 +12,29 @@ require('malta').checkExec('jsdoc');
 // 
 // http://usejsdoc.org/
 
-var path = require('path'),
+const path = require('path'),
 	child_process = require('child_process');
 
 function malta_doc(o, options) {
 
 	options = options || {};
 
-	var self = this,
+	const self = this,
 		start = new Date(),
-		msg,
 		outDir = path.dirname(o.name),
 		inDir = path.dirname(self.tplPath),
 		opts = [o.name],
-		pluginName = path.basename(path.dirname(__filename)),
-		i;
+        pluginName = path.basename(path.dirname(__filename));
+        
+    let msg;
 
-	if ('d' in options) {
-		opts.push('-d', outDir + '/' + options.d);
-	}
+	'd' in options && opts.push('-d', outDir + '/' + options.d);
+	
 	if ('c' in options) {
 		opts.push('-c', inDir + '/' + options.c);
 		self.listen(inDir + '/' + options.c);
 	}
-	if ('t' in options) {
-		opts.push('-t', options.t);
-	}
+	't' in options && opts.push('-t', options.t);
 /*
     
     -c, --configure <value>      The path to the configuration file. Default: path/to/jsdoc/conf.json
@@ -46,16 +43,16 @@ function malta_doc(o, options) {
     -R, --readme <value>         The path to the project's README file. Default: path/to/sourcefiles/README.md
     -t, --template <value>       The path to the template to use. Default: path/to/jsdoc/templates/default
 */
-	return function (solve, reject){
+	return (solve, reject) => {
 		try {
-			var ls = child_process.spawn('jsdoc', opts);
+			const ls = child_process.spawn('jsdoc', opts);
 			msg = 'plugin ' + pluginName.white() + ' wrote docs';
-			ls.on('exit', function (code) {
+			ls.on('exit', code => {
 				msg = 'plugin ' + pluginName.white() + ' wrote docs';
 				solve(o);
 				self.notifyAndUnlock(start, msg);
 			});
-			ls.on('error', function (err) {
+			ls.on('error', err =>  {
 				msg = 'plugin ' + pluginName.white() + ' DIDN`T'.red() +' wrote docs';
 				self.doErr(err, o, pluginName);
 				err

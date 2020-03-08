@@ -1,11 +1,12 @@
 ---
 [![npm version](https://badge.fury.io/js/malta-jsdoc.svg)](http://badge.fury.io/js/malta-jsdoc)
-[![Dependencies](https://david-dm.org/fedeghe/malta-jsdoc.svg)](https://david-dm.org/fedeghe/malta-jsdoc)
 [![npm downloads](https://img.shields.io/npm/dt/malta-jsdoc.svg)](https://npmjs.org/package/malta-jsdoc)
 [![npm downloads](https://img.shields.io/npm/dm/malta-jsdoc.svg)](https://npmjs.org/package/malta-jsdoc)  
 ---  
 
-This plugin can be used on: **.js** files and even on **.coffee** and **.ts** files after using the right plugin
+This plugin can be used on: **.js** files and even on **.coffee** and **.ts** files after using the right plugin  
+
+`jsdoc` needs to be available from the console.
 
 Options : 
     - **d** : the folder where all documentation must be generated, relative to outdir.  
@@ -37,3 +38,4 @@ Malta.get().check([
         console.log('=========');
     });
 ```
+
